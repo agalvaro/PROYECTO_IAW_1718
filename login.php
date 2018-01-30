@@ -1,5 +1,8 @@
 <?php
   session_start();
+  if ( isset($_SESSION["user"])) {
+    session_destroy();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +15,7 @@
   <body>
 
     <div class="container">
-      <div class="row mt-5 justify-content-center ">
+      <div class="row mt-5 justify-content-center">
         <div class="col-sm-6 col-md-4 bg-warning rounded">
           <form method="post">
             <div class="form-group">
@@ -24,7 +27,7 @@
               <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Introduce tu contraseña">
             </div>
             <p>¿Aún no tienes cuenta?<a href="registro.php">¡Regístrate!</a></p>
-            <button type="submit" class="btn btn-primary">Entrar</button>
+            <button type="submit" class="mb-3 btn btn-primary offset-md-9">Entrar</button>
           </form>
 
     <?php
@@ -54,11 +57,11 @@
                   while ($obj=$result->fetch_object()) {
                     if ($obj->tipo=="usuario") {
                       $_SESSION["user"]=$_POST["user"];
-                      header("Location: usuario/index.php");
+                      header("Location: usuario/inicio.php");
                     } else {
                       $_SESSION["user"]=$_POST["user"];
                       $_SESSION["admin"]="Admin";
-                      header("Location: admin/index.php");
+                      header("Location: admin/inicio.php");
                     }
                 }
               }
