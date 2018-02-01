@@ -49,6 +49,7 @@ DROP TABLE IF EXISTS `pistas`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pistas` (
   `id_pista` int(4) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) DEFAULT NULL,
   `tipo` enum('Futbol','Tenis','Baloncesto') DEFAULT NULL,
   PRIMARY KEY (`id_pista`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -60,7 +61,7 @@ CREATE TABLE `pistas` (
 
 LOCK TABLES `pistas` WRITE;
 /*!40000 ALTER TABLE `pistas` DISABLE KEYS */;
-INSERT INTO `pistas` VALUES (1,'Futbol'),(2,'Tenis'),(3,'Baloncesto');
+INSERT INTO `pistas` VALUES (1,'Pista de futbol','Futbol'),(2,'Pista de tenis','Tenis'),(3,'Pista de baloncesto','Baloncesto');
 /*!40000 ALTER TABLE `pistas` ENABLE KEYS */;
 UNLOCK TABLES;
 

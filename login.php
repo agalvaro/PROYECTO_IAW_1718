@@ -32,7 +32,7 @@
 
     <?php
 
-        if (isset($_POST["user"])) {
+    if (isset($_POST["user"])) {
 
 
           $connection = new mysqli("192.168.1.159", "root", "Admin2015","web", 3316);

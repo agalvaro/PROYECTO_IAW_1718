@@ -47,7 +47,7 @@
       }
 
 
-      $usuario="INSERT INTO usuarios (nombre,apellidos,telefono,correo,passwd, tipo) VALUES ('".$_POST['name']."','".$_POST['ape']."','".$_POST['tlf']."','".$_POST['user']."',md5('".$_POST['password']."'),'usuario');";
+      $usuario="INSERT INTO usuarios (nombre,apellidos,telefono,correo,passwd,tipo) VALUES ('".$_POST['name']."','".$_POST['ape']."','".$_POST['tlf']."','".$_POST['user']."',md5('".$_POST['password']."'),'usuario');";
         if ($result = $connection->query($usuario)) {
          echo "<h1>Has sido registrado</h1>";
        } else {
