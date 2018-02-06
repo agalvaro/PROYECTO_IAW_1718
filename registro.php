@@ -38,7 +38,7 @@
     <?php else: ?>
       <?php
 
-      $connection = new mysqli("192.168.1.159", "root", "Admin2015","web", 3316);
+      include("../includes/conexion.php");
 
 
       if ($connection->connect_errno) {
@@ -50,6 +50,7 @@
       $usuario="INSERT INTO usuarios (nombre,apellidos,telefono,correo,passwd,tipo) VALUES ('".$_POST['name']."','".$_POST['ape']."','".$_POST['tlf']."','".$_POST['user']."',md5('".$_POST['password']."'),'usuario');";
         if ($result = $connection->query($usuario)) {
          echo "<h1>Has sido registrado</h1>";
+         header("Location: ../login.php");
        } else {
          echo "<h1>Error</h1>";
        }

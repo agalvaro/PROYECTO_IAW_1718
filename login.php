@@ -35,7 +35,7 @@
     if (isset($_POST["user"])) {
 
 
-          $connection = new mysqli("192.168.1.159", "root", "Admin2015","web", 3316);
+          include("../includes/conexion.php");
 
 
           if ($connection->connect_errno) {
@@ -57,9 +57,11 @@
                   while ($obj=$result->fetch_object()) {
                     if ($obj->tipo=="usuario") {
                       $_SESSION["user"]=$_POST["user"];
+                      $_SESSION["id"]=$obj->id_usuario;
                       header("Location: usuario/inicio.php");
                     } else {
                       $_SESSION["user"]=$_POST["user"];
+                      $_SESSION["id"]=$obj->id_usuario;
                       $_SESSION["admin"]="Admin";
                       header("Location: admin/inicio.php");
                     }

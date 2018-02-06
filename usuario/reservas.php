@@ -24,13 +24,7 @@
 
 
 
-  $connection = new mysqli("192.168.1.159", "root", "Admin2015","web", 3316);
-
-
-  if ($connection->connect_errno) {
-      printf("Connection failed: %s\n", $connection->connect_error);
-      exit();
-  }
+  include("../includes/conexion.php");
 
 
   $consulta="select * from usuarios u join reservas r on u.id_usuario=r.id_usuario join pistas p on r.id_pista=p.id_pista where
@@ -43,7 +37,6 @@
 
       if ($result->num_rows===0) {
         echo "<p>No ha realizado reservas</p>";
-        echo $consulta;
       } else {
         echo "<ul>";
         while ($obj=$result->fetch_object()) {
@@ -78,7 +71,38 @@
   </div>
   <div class="form-group">
     <label>Hora</label>
-    <input name="tiempo" type="time" class="form-control" required>
+    <select class="form-control" name="hora" required>
+      <option value="9:00">9:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+      <option value="13:00">13:00</option>
+      <option value="14:00">14:00</option>
+      <option value="16:00">16:00</option>
+      <option value="17:00">17:00</option>
+      <option value="18:00">18:00</option>
+      <option value="19:00">19:00</option>
+      <option value="20:00">20:00</option>
+      <option value="21:00">21:00</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label >Material</label>
+    <select class="form-control" name="material">
+      <option value=''></option>
+      <?php
+
+      $consulta="select * from material;";
+
+      if ($result = $connection->query($consulta)) {
+
+          while ($obj=$result->fetch_object()) {
+            echo "<option value='".$obj->id_material."'>".$obj->nombre."</option>";
+            }
+      }
+
+      ?>
+    </select>
   </div>
   <button type="submit" class="mb-3 btn btn-primary offset-md-9">Reservar</button>
 </form>
@@ -86,18 +110,28 @@
 
 <?php
 
-$usu="select id_usuario from usuarios where correo='".$_SESSION['user']."'";
+$usu="select * from reservas where fecha='".$_POST['fecha']."' and hora_inicio='".$_POST['hora']."'";
+
 if ($result = $connection->query($usu)) {
 
-    while ($obj=$result->fetch_object()) {
-      $usuario=$obj->id_usuario;
-      $consulta="INSERT INTO reservas (fecha,hora_inicio,id_usuario,id_pista) VALUES ('".$_POST['fecha']."','".$_POST['tiempo']."','$usuario','".$_POST['id']."');";
+    if ($result->num_rows===0) {
 
-      if ($connection->query($consulta)) {
-        echo "<p>Reserva realizada</p>";
-      } else {
-        echo "$consulta";
-      }
+        $consulta="INSERT INTO reservas (fecha,hora_inicio,id_usuario,id_pista) VALUES ('".$_POST['fecha']."','".$_POST['hora']."','".$_SESSION['id']."','".$_POST['id']."');";
+
+        if ($connection->query($consulta)) {
+          echo "<p>Reserva realizada</p>";
+
+          if ($_POST['material']!='') {
+            $consulta="INSERT INTO reserva_material VALUES ($connection->insert_id,'".$_POST['material']."');";
+            if ($result = $connection->query($consulta)) {
+            }
+          }
+
+        } else {
+          echo "$consulta";
+        }
+    } else {
+      echo "<p style='color:red'>YA EXISTE UNA RESERVA PARA ESA HORA Y ESE DÍA</p>";
     }
 }
 
