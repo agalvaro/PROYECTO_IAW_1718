@@ -17,7 +17,13 @@
   </head>
   <body>
     <div class='container'>
-      <?php include("../includes/menu.php") ?>
+      <?php if (isset($_SESSION["user"])&&($_SESSION["tipo"])=='admin' ) {
+                include("../includes/menuadmin.php");
+              } else{
+                include("../includes/menu.php");
+            }
+
+      ?>
       <hr>
 
 <?php

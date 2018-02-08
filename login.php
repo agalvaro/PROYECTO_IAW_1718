@@ -35,7 +35,7 @@
     if (isset($_POST["user"])) {
 
 
-          include("../includes/conexion.php");
+          include("includes/conexion.php");
 
 
           if ($connection->connect_errno) {
@@ -55,14 +55,13 @@
                 echo "<center>LOGIN INVALIDO</center>";
               } else {
                   while ($obj=$result->fetch_object()) {
+                    $_SESSION["user"]=$_POST["user"];
+                    $_SESSION["id"]=$obj->id_usuario;
                     if ($obj->tipo=="usuario") {
-                      $_SESSION["user"]=$_POST["user"];
-                      $_SESSION["id"]=$obj->id_usuario;
+                      $_SESSION["tipo"]="Usuario";
                       header("Location: usuario/inicio.php");
                     } else {
-                      $_SESSION["user"]=$_POST["user"];
-                      $_SESSION["id"]=$obj->id_usuario;
-                      $_SESSION["admin"]="Admin";
+                      $_SESSION["tipo"]="admin";
                       header("Location: admin/inicio.php");
                     }
                 }
