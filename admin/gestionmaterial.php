@@ -47,7 +47,8 @@
                 echo "<tr>";
                   echo "<td>".$obj->nombre."</td>";
                   echo "<td>".$obj->cantidad."</td>";
-                  echo "<td></td>";
+                  echo "<td><a href='editar_material.php?m=".$obj->id_material."'><img class='w-30 img-thumbnail' src='../img/lapiz.png'></a></td>";
+                  echo "<td><a href='borrar_material.php?m=".$obj->id_material."'><img class='w-30 img-thumbnail' src='../img/trash.jpg'></a></td>";
                 echo "</tr>";
                 }
                 echo "</tbody>";

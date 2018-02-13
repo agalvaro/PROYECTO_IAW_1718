@@ -28,20 +28,20 @@
       <?php
 
         if (empty($_GET)) {
-          echo "No se han recibido datos del usuario";
+          echo "No se han recibido datos del material";
           exit();
         }
 
 
       ?>
 
-      <?php if (!isset($_POST["correo"])) : ?>
+      <?php if (!isset($_POST["nombre"])) : ?>
 
       <?php
 
         include("../includes/conexion.php");
 
-        $query="SELECT * from usuarios where id_usuario='".$_GET["u"]."'";
+        $query="SELECT * from material where id_material='".$_GET["m"]."'";
 
         if ($result = $connection->query($query))  {
 
@@ -52,14 +52,12 @@
             exit();
           }
 
-          $codigo = $obj->id_usuario;
+          $codigo = $obj->id_material;
           $nom = $obj->nombre;
-          $ap = $obj->apellidos;
-          $tlf = $obj->telefono;
-          $co = $obj->correo;
+          $cant = $obj->cantidad;
 
         } else {
-          echo "No se han recuperado los datos del usuario";
+          echo "No se han recuperado los datos del material";
           exit();
         }
 
@@ -70,16 +68,8 @@
           <input name="nombre" type="text" class="form-control" id="formGroupExampleInput" value='<?php echo $nom; ?>' required>
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">Apellidos</label>
-          <input name="apellidos" type="text" class="form-control" id="formGroupExampleInput2" value='<?php echo $ap; ?>' required>
-        </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput">Telefono</label>
-          <input name="telefono" type="text" class="form-control" id="formGroupExampleInput" value='<?php echo $tlf; ?>' required>
-        </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput">Correo</label>
-          <input name="correo" type="text" class="form-control" id="formGroupExampleInput" value='<?php echo $co; ?>' required>
+          <label for="formGroupExampleInput2">Cantidad</label>
+          <input name="cantidad" type="text" class="form-control" id="formGroupExampleInput2" value='<?php echo $ap; ?>' required>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <input type="hidden" name="codigo" value='<?php echo $codigo; ?>'>
@@ -91,17 +81,15 @@
 
       $codigo = $_POST["codigo"];
       $nom = $_POST["nombre"];
-      $ape = $_POST["apellidos"];
-      $tlf = $_POST["telefono"];
-      $co = $_POST["correo"];
+      $cant = $_POST["cantidad"];
 
       include("../includes/conexion.php");
 
-      $query="update usuarios set nombre='$nom',apellidos='$ape',telefono='$tlf',correo='$co'
-      WHERE id_usuario='$codigo'";
+      $query="update material set nombre='$nom',cantidad='$cant'
+      WHERE id_material='$codigo'";
 
       if ($result = $connection->query($query)) {
-        header('Location: gestionusuarios.php');
+        header('Location: gestionmaterial.php');
 
       } else {
         echo "Error al actualizar los datos";

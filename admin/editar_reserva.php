@@ -88,9 +88,10 @@
       $query="update reservas set fecha='$fecha',hora_inicio='$hora'
       WHERE id_reserva='$codigo'";
 
-      echo $query;
+
       if ($result = $connection->query($query)) {
-        echo "Datos actualizados";
+        header('Location: gestionreservas.php');
+
       } else {
         echo "Error al actualizar los datos";
       }
