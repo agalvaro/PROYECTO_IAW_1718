@@ -38,6 +38,7 @@
           echo "<tr>";
           echo "<th>Nombre</th>";
           echo "<th>Tipo</th>";
+          echo "<th></th>";
           echo "</tr>";
           echo "</thead>";
           echo "<tbody>";
@@ -46,6 +47,7 @@
                 echo "<tr>";
                   echo "<td>".$obj->nombre."</td>";
                   echo "<td>".$obj->tipo."</td>";
+                  echo "<td></td>";
                 echo "</tr>";
                 }
                 echo "</tbody>";

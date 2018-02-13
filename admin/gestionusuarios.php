@@ -25,6 +25,48 @@
 
       ?>
       <hr>
+      <?php
+
+        include("../includes/conexion.php");
+
+        $consulta="select * from usuarios;";
+
+        if ($result = $connection->query($consulta)) {
+
+          echo "<table class='table table-striped table-inverse'>";
+          echo "<thead>";
+          echo "<tr>";
+          echo "<th>Nombre</th>";
+          echo "<th>Apellidos</th>";
+          echo "<th>Telefono</th>";
+          echo "<th>Correo</th>";
+          echo "<th>Tipo</th>";
+          echo "<th></th>";
+          echo "</tr>";
+          echo "</thead>";
+          echo "<tbody>";
+
+              while ($obj=$result->fetch_object()) {
+                echo "<tr>";
+                  echo "<td>".$obj->nombre."</td>";
+                  echo "<td>".$obj->apellidos."</td>";
+                  echo "<td>".$obj->telefono."</td>";
+                  echo "<td>".$obj->correo."</td>";
+                  echo "<td>".$obj->tipo."</td>";
+                  echo "<td><a href='editar_usuario.php?u=".$obj->id_usuario."'><img src='fdfd'></a></td>";
+                  echo "<td><a href='borrar_usuario.php?u=".$obj->id_usuario."'><img src='fdfd'></a></td>";
+
+
+
+                echo "</tr>";
+                }
+                echo "</tbody>";
+                echo "</table>";
+            }
+        $result->close();
+        unset($obj);
+        unset($connection);
+      ?>
     </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

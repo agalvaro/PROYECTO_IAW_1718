@@ -25,6 +25,42 @@
 
       ?>
       <hr>
+      <?php
+
+        include("../includes/conexion.php");
+
+        $consulta="select reservas.id_reserva,reservas.fecha,reservas.hora_inicio,pistas.tipo,usuarios.correo from usuarios,reservas,pistas where usuarios.id_usuario=reservas.id_usuario and reservas.id_pista=pistas.id_pista;";
+
+        if ($result = $connection->query($consulta)) {
+
+          echo "<table class='table table-striped table-inverse'>";
+          echo "<thead>";
+          echo "<tr>";
+          echo "<th>Fecha</th>";
+          echo "<th>Hora Inicio</th>";
+          echo "<th>Pista</th>";
+          echo "<th>Cliente</th>";
+          echo "</tr>";
+          echo "</thead>";
+          echo "<tbody>";
+
+              while ($obj=$result->fetch_object()) {
+                echo "<tr>";
+                  echo "<td>".$obj->fecha."</td>";
+                  echo "<td>".$obj->hora_inicio."</td>";
+                  echo "<td>".$obj->tipo."</td>";
+                  echo "<td>".$obj->correo."</td>";
+                  echo "<td><a href='editar_reserva.php?i=".$obj->id_reserva."'><img src='fdfd'></a></td>";
+                  echo "<td><a href='borrar_reserva.php?i=".$obj->id_reserva."'><img src='fdfd'></a></td>";
+                echo "</tr>";
+                }
+                echo "</tbody>";
+                echo "</table>";
+            }
+        $result->close();
+        unset($obj);
+        unset($connection);
+      ?>
     </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
