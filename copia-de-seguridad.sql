@@ -77,8 +77,8 @@ CREATE TABLE `reserva_material` (
   `id_material` int(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_reserva`,`id_material`),
   KEY `id_material` (`id_material`),
-  CONSTRAINT `reserva_material_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`),
-  CONSTRAINT `reserva_material_ibfk_2` FOREIGN KEY (`id_material`) REFERENCES `material` (`id_material`)
+  CONSTRAINT `reserva_material_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reservas` (`id_reserva`) on delete cascade,
+  CONSTRAINT `reserva_material_ibfk_2` FOREIGN KEY (`id_material`) REFERENCES `material` (`id_material`) on delete cascade
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

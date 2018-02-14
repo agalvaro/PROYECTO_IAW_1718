@@ -50,8 +50,8 @@
                   echo "<td>".$obj->hora_inicio."</td>";
                   echo "<td>".$obj->tipo."</td>";
                   echo "<td>".$obj->correo."</td>";
-                  echo "<td><a href='editar_reserva.php?i=".$obj->id_reserva."'><img src='fdfd'></a></td>";
-                  echo "<td><a href='borrar_reserva.php?i=".$obj->id_reserva."'><img src='fdfd'></a></td>";
+                  echo "<td><a href='editar_reserva.php?i=".$obj->id_reserva."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/lapiz.png'></a></td>";
+                  echo "<td><a href='borrar_reserva.php?i=".$obj->id_reserva."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/trash.jpg'></a></td>";
                 echo "</tr>";
                 }
                 echo "</tbody>";

@@ -53,8 +53,8 @@
                   echo "<td>".$obj->telefono."</td>";
                   echo "<td>".$obj->correo."</td>";
                   echo "<td>".$obj->tipo."</td>";
-                  echo "<td><a href='editar_usuario.php?u=".$obj->id_usuario."'><img class='w-30 img-thumbnail' src='../img/apiz.png'></a></td>";
-                  echo "<td><a href='borrar_usuario.php?u=".$obj->id_usuario."'><img src='fdfd'></a></td>";
+                  echo "<td><a href='editar_usuario.php?u=".$obj->id_usuario."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/lapiz.png'></a></td>";
+                  echo "<td><a href='borrar_usuario.php?u=".$obj->id_usuario."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/trash.jpg'></a></td>";
                 echo "</tr>";
                 }
                 echo "</tbody>";

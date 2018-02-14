@@ -24,40 +24,41 @@
             }
 
       ?>
-      <hr>
-      <?php
+      <?php if (!isset($_POST['nombre'])) : ?>
+      <form method="post">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Nombre</label>
+            <input name="nombre" type="text" class="form-control" id="formGroupExampleInput" required>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Tipo</label>
+            <input name="tipo" type="text" class="form-control" id="formGroupExampleInput2" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+      </form>
 
-        include("../includes/conexion.php");
+      <?php else: ?>
 
-        $consulta="select * from material;";
+        <?php
 
-        if ($result = $connection->query($consulta)) {
+          $nombre=$_POST['nombre'];
+          $tipo=$_POST['tipo'];
 
-          echo "<table class='table table-striped table-inverse'>";
-          echo "<thead>";
-          echo "<tr>";
-          echo "<th>Nombre</th>";
-          echo "<th>Cantidad</th>";
-          echo "<th></th>";
-          echo "</tr>";
-          echo "</thead>";
-          echo "<tbody>";
+          include("../includes/conexion.php");
 
-              while ($obj=$result->fetch_object()) {
-                echo "<tr>";
-                  echo "<td>".$obj->nombre."</td>";
-                  echo "<td>".$obj->cantidad."</td>";
-                  echo "<td><a href='editar_material.php?m=".$obj->id_material."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/lapiz.png'></a></td>";
-                  echo "<td><a href='borrar_material.php?m=".$obj->id_material."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/trash.jpg'></a></td>";
-                echo "</tr>";
-                }
-                echo "</tbody>";
-                echo "</table>";
-            }
-        $result->close();
-        unset($obj);
-        unset($connection);
-      ?>
+          $query="INSERT INTO pistas (nombre,tipo) values('$nombre','$tipo');";
+
+          if ($result = $connection->query($query)) {
+            header("Location: gestionpistas.php");
+          } else {
+            echo "No se ha insertado la pista";
+            echo "$query";
+          }
+
+         ?>
+
+      <?php endif ?>
+
     </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

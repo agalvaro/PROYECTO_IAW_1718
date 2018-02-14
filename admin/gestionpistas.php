@@ -36,6 +36,7 @@
           echo "<table class='table table-striped table-inverse'>";
           echo "<thead>";
           echo "<tr>";
+          echo "<th><a href='anadir_pista.php'>+</th>";
           echo "<th>Nombre</th>";
           echo "<th>Tipo</th>";
           echo "<th></th>";
@@ -45,9 +46,11 @@
 
               while ($obj=$result->fetch_object()) {
                 echo "<tr>";
+                  echo "<td></td>";
                   echo "<td>".$obj->nombre."</td>";
                   echo "<td>".$obj->tipo."</td>";
-                  echo "<td></td>";
+                  echo "<td><a href='editar_pista.php?m=".$obj->id_material."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/lapiz.png'></a></td>";
+                  echo "<td><a href='borrar_pista.php?m=".$obj->id_material."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/trash.jpg'></a></td>";
                 echo "</tr>";
                 }
                 echo "</tbody>";
