@@ -28,69 +28,67 @@
       <?php
 
         if (empty($_GET)) {
-          echo "No se han recibido datos de la reserva";
+          echo "No se han recibido datos de la pista";
           exit();
         }
 
 
       ?>
 
-      <?php if (!isset($_POST["fecha"])) : ?>
+      <?php if (!isset($_POST["nombre"])) : ?>
 
       <?php
 
         include("../includes/conexion.php");
 
-        $query="SELECT * from reservas where id_reserva='".$_GET["i"]."'";
+        $query="SELECT * from pistas where id_pista='".$_GET["p"]."'";
 
         if ($result = $connection->query($query))  {
 
           $obj = $result->fetch_object();
 
           if ($result->num_rows==0) {
-            echo "No existe dicha reserva";
+            echo "No existe la pista";
             exit();
           }
 
-          $codigo = $obj->id_reserva;
-          $fecha = $obj->fecha;
-          $hora = $obj->hora_inicio;
+          $cod = $obj->id_pista;
+          $nom = $obj->nombre;
+          $tipo = $obj->tipo;
 
         } else {
-          echo "No se han recuperado los datos de la reserva";
+          echo "No se han recuperado los datos de la pista";
           exit();
         }
 
       ?>
       <form method="post">
         <div class="form-group">
-          <label for="formGroupExampleInput">Fecha</label>
-          <input name="fecha" type="date" class="form-control" id="formGroupExampleInput" value='<?php echo $fecha; ?>' required>
+          <label for="formGroupExampleInput">Nombre</label>
+          <input name="nombre" type="text" class="form-control" id="formGroupExampleInput" value='<?php echo $nom; ?>' required>
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">Hora</label>
-          <input name="hora" type="time" class="form-control" id="formGroupExampleInput2" value='<?php echo $hora; ?>' required>
+          <label for="formGroupExampleInput2">Tipo</label>
+          <input name="tipo" type="text" class="form-control" id="formGroupExampleInput2" value='<?php echo $tipo; ?>' required>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
-        <input type="hidden" name="codigo" value='<?php echo $codigo; ?>'>
+        <input type="hidden" name="codigo" value='<?php echo $cod; ?>'>
       </form>
 
     <?php else: ?>
 
       <?php
 
-      $codigo = $_POST["codigo"];
-      $fecha = $_POST["fecha"];
-      $hora = $_POST["hora"];
+      $cod= $_POST["codigo"];
+      $nom = $_POST["nombre"];
+      $tipo = $_POST["tipo"];
 
       include("../includes/conexion.php");
 
-      $query="update reservas set fecha='$fecha',hora_inicio='$hora'
-      WHERE id_reserva='$codigo'";
-
+      $query="update pistas set nombre='$nom',tipo='$tipo' WHERE id_pista='$cod'";
 
       if ($result = $connection->query($query)) {
-        header('Location: gestionreservas.php');
+        header('Location: gestionpistas.php');
 
       } else {
         echo "Error al actualizar los datos";

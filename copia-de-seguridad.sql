@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `pistas`;
 CREATE TABLE `pistas` (
   `id_pista` int(4) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) DEFAULT NULL,
-  `tipo` enum('Futbol','Tenis','Baloncesto') DEFAULT NULL,
+  `tipo` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id_pista`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

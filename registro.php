@@ -8,7 +8,7 @@
   <body>
     <?php if (!isset($_POST['user'])) : ?>
       <div class="container">
-        <div class="row mt-5 justify-content-center ">
+        <div class="row mt-5 justify-content-center">
           <div class="col-sm-6 col-md-4 bg-warning rounded">
             <form method="post">
               <div class="form-group">
@@ -31,9 +31,7 @@
                 <label for="exampleInputPassword1">Contraseña</label>
                 <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Introduce tu contraseña">
               </div>
-              <div class="form-group">
-              </div>
-              <button type="submit" class="btn btn-primary">Registrarme</button>
+              <button type="submit" class="mb-3 btn btn-primary offset-md-6">Registrarme</button>
             </form>
     <?php else: ?>
       <?php

@@ -36,6 +36,7 @@
           echo "<table class='table table-striped table-inverse'>";
           echo "<thead>";
           echo "<tr>";
+          echo "<th><a href='anadir_material.php'>+</th>";
           echo "<th>Nombre</th>";
           echo "<th>Cantidad</th>";
           echo "<th></th>";
@@ -45,6 +46,7 @@
 
               while ($obj=$result->fetch_object()) {
                 echo "<tr>";
+                  echo "<td></td>";
                   echo "<td>".$obj->nombre."</td>";
                   echo "<td>".$obj->cantidad."</td>";
                   echo "<td><a href='editar_material.php?m=".$obj->id_material."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/lapiz.png'></a></td>";
