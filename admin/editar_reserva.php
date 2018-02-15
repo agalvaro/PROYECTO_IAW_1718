@@ -74,7 +74,7 @@
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <input type="hidden" name="codigo" value='<?php echo $codigo; ?>'>
       </form>
-      
+
     <?php else: ?>
 
       <?php
@@ -85,16 +85,25 @@
 
       include("../includes/conexion.php");
 
-      $query="update reservas set fecha='$fecha',hora_inicio='$hora'
-      WHERE id_reserva='$codigo'";
+      $query="select * from reservas where fecha='".$_POST['fecha']."' and hora_inicio='".$_POST['hora']."'";
 
+      if ($result = $connection->query($usu)) {
 
-      if ($result = $connection->query($query)) {
-        header('Location: gestionreservas.php');
+          if ($result->num_rows===0) {
 
-      } else {
-        echo "Error al actualizar los datos";
-      }
+              $consulta="update reservas set fecha='$fecha',hora_inicio='$hora' WHERE id_reserva='$codigo'";
+
+              if ($connection->query($consulta)) {
+                echo "<p>Reserva modificada</p>";
+
+                }
+
+              } else {
+                echo "$consulta";
+              }
+          } else {
+            echo "<p style='color:red'>YA EXISTE UNA RESERVA PARA ESA HORA Y ESE DÍA</p>";
+          }
 
       ?>
 
