@@ -46,7 +46,7 @@
       } else {
         echo "<ul>";
         while ($obj=$result->fetch_object()) {
-          echo "<li>Tienes reservada la ".$obj->nombre." para el día ".$obj->fecha." y la hora es a las ".$obj->hora_inicio.".</li>";
+          echo "<li>Tienes reservada la ".$obj->nombre." para el día ".$obj->fecha." y la hora es a las ".$obj->hora_inicio.". <a href='add_mat.php?a=".$obj->id_reserva."'>+</a></li>";
           }
         echo "</ul>";
       }

@@ -24,7 +24,6 @@
             }
 
       ?>
-      <hr>
       <?php
 
         if (empty($_GET)) {
@@ -34,14 +33,13 @@
 
 
       ?>
-
       <?php if (!isset($_POST["fecha"])) : ?>
 
       <?php
 
         include("../includes/conexion.php");
 
-        $query="SELECT * from reservas where id_reserva='".$_GET["i"]."'";
+        $query="SELECT * from reservas where id_reserva='".$_GET["a"]."'";
 
         if ($result = $connection->query($query))  {
 
@@ -63,18 +61,24 @@
 
       ?>
       <form method="post">
-        <div class="form-group">
-          <label for="formGroupExampleInput">Fecha</label>
-          <input name="fecha" type="date" class="form-control" id="formGroupExampleInput" value='<?php echo $fecha; ?>' required>
-        </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput2">Hora</label>
-          <input name="hora" type="time" class="form-control" id="formGroupExampleInput2" value='<?php echo $hora; ?>' required>
-        </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
-        <input type="hidden" name="codigo" value='<?php echo $codigo; ?>'>
-      </form>
-      
+      <label >Material</label>
+      <select class="form-control" name="material">
+        <option value=''></option>
+        <?php
+
+        $consulta="select * from material;";
+
+        if ($result = $connection->query($consulta)) {
+
+            while ($obj=$result->fetch_object()) {
+              echo "<option value='".$obj->id_material."'>".$obj->nombre."</option>";
+              }
+        }
+
+        ?>
+      </select>
+    </form>
+
     <?php else: ?>
 
       <?php
@@ -99,9 +103,9 @@
       ?>
 
     <?php endif ?>
-  </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>

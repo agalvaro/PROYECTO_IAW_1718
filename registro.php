@@ -36,19 +36,14 @@
     <?php else: ?>
       <?php
 
-      include("../includes/conexion.php");
+    include("includes/conexion.php");
 
 
-      if ($connection->connect_errno) {
-          printf("Connection failed: %s\n", $connection->connect_error);
-          exit();
-      }
+    $usuario="INSERT INTO usuarios (nombre,apellidos,telefono,correo,passwd,tipo) VALUES ('".$_POST['name']."','".$_POST['ape']."','".$_POST['tlf']."','".$_POST['user']."',md5('".$_POST['password']."'),'usuario');";
 
-
-      $usuario="INSERT INTO usuarios (nombre,apellidos,telefono,correo,passwd,tipo) VALUES ('".$_POST['name']."','".$_POST['ape']."','".$_POST['tlf']."','".$_POST['user']."',md5('".$_POST['password']."'),'usuario');";
         if ($result = $connection->query($usuario)) {
          echo "<h1>Has sido registrado</h1>";
-         header("Location: ../login.php");
+         header("Location: login.php");
        } else {
          echo "<h1>Error</h1>";
        }
