@@ -31,19 +31,22 @@
 
 
         if ($result = $connection->query($consulta)) {
+          echo "<br>";
+          echo "<div class='card-group'>";
 
               while ($obj=$result->fetch_object()) {
                 $img=$obj->imagen;
-                echo "<br>";
-                echo "<div class='card' style='width: 18rem;'>
+                echo "<div class='card'>
                       <img class='card-img-top' src='../img/$img'>
-                        <div class='card-body'>
-                            <h5 class='card-title'>$obj->nombre</h5>
-                            <h6 class='card-subtitle mb-2 text-muted'>$obj->tipo</h6>
-                            <a href='reservas.php' class='card-link'>Reservar</a>
+                        <div class='card-block'>
+                        <h4 class='card-title'>$obj->nombre</h4>
+                        <p class='card-text'>$obj->tipo</p>
+                        <a href='reservas.php' class='card-link'>Reservar</a>
                         </div>
                       </div>";
                 }
+
+                echo "</div>";
             }
         $result->close();
         unset($obj);

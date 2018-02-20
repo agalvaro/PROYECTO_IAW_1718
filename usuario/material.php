@@ -32,14 +32,21 @@
                     from material;";
 
         if ($result = $connection->query($consulta)) {
+              echo "<br>";
+              echo "<div class='card-group'>";
 
               while ($obj=$result->fetch_object()) {
-                echo "<div class='card' style='width: 18rem;'>
-                        <div class='card-body'>
-                            <h5 class='card-title'>$obj->nombre</h5>
+                $img=$obj->imagen;
+
+                echo "<div class='card'>
+                      <img class='card-img-top' src='../img/$img'>
+                        <div class='card-block'>
+                        <h4 class='card-title'>$obj->nombre</h4>
+                        <p class='card-text'>$obj->tipo</p>
                         </div>
                       </div>";
                 }
+                echo "</div>";
             }
         $result->close();
         unset($obj);

@@ -26,6 +26,7 @@ CREATE TABLE `material` (
   `id_material` int(4) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) DEFAULT NULL,
   `cantidad` varchar(10) DEFAULT NULL,
+  `imagen` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id_material`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +37,7 @@ CREATE TABLE `material` (
 
 LOCK TABLES `material` WRITE;
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` VALUES (1,'balon de futbol','3'),(2,'balon de basket','3');
+INSERT INTO `material` VALUES (1,'balon de futbol','3','mikasa.jpg'),(2,'balon de basket','3','spalding.jpg'),(3,'pelota de tenis','20','art.jpg'),(4,'balon de balonmano','3','balonm.jpg'),(5,'cono','20','conos.jpg');
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +63,7 @@ CREATE TABLE `pistas` (
 
 LOCK TABLES `pistas` WRITE;
 /*!40000 ALTER TABLE `pistas` DISABLE KEYS */;
-INSERT INTO `pistas` VALUES (1,'Pista de futbol','Futbol','campo.jpg'),(2,'Pista de tenis','Tenis','tenis.jpg'),(3,'Pista de baloncesto','Baloncesto','baloncesto.jpg');
+INSERT INTO `pistas` VALUES (1,'Pista de futbol','Futbol','campo.jpg'),(2,'Pista de tenis','Tenis','tenis.jpg'),(3,'Pista de baloncesto','Baloncesto','baloncesto.jpg'),(4,'Pista de balonmano','Balonmano','balonmano.jpg');
 /*!40000 ALTER TABLE `pistas` ENABLE KEYS */;
 UNLOCK TABLES;
 
