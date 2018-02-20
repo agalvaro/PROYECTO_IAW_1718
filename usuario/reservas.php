@@ -33,8 +33,12 @@
   include("../includes/conexion.php");
 
 
-  $consulta="select * from usuarios u join reservas r on u.id_usuario=r.id_usuario join pistas p on r.id_pista=p.id_pista where
-  u.correo='".$_SESSION["user"]."' order by r.fecha asc;";
+  $consulta="select p.nombre as n1,r.fecha as n2,r.hora_inicio as n3,m.nombre as n4,r.id_reserva as n5
+  from usuarios u join reservas r on u.id_usuario=r.id_usuario
+  join pistas p on r.id_pista=p.id_pista
+  left join reserva_material on r.id_reserva=reserva_material.id_reserva
+  left join material m on reserva_material.id_material=m.id_material
+  where u.correo='".$_SESSION["user"]."' order by r.fecha asc;";
 
 
 
@@ -44,11 +48,30 @@
       if ($result->num_rows===0) {
         echo "<p>No ha realizado reservas</p>";
       } else {
-        echo "<ul>";
+        echo "<table class='table table-striped table-inverse'>";
+        echo "<thead>";
+        echo "<th>Nombre de la pista</th>";
+        echo "<th>Fecha</th>";
+        echo "<th>Hora</th>";
+        echo "<th>Material</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+
         while ($obj=$result->fetch_object()) {
-          echo "<li>Tienes reservada la ".$obj->nombre." para el día ".$obj->fecha." y la hora es a las ".$obj->hora_inicio.". <a href='add_mat.php?a=".$obj->id_reserva."'>+</a></li>";
+          echo "<tr>";
+            echo "<td>".$obj->n1."</td>";
+            echo "<td>".$obj->n2."</td>";
+            echo "<td>".$obj->n3."</td>";
+            if ($obj->n4===NULL) {
+              echo "<td><a href='add_mat.php?a=".$obj->n5."'>+</a></td>";
+            } else {
+              echo "<td>".$obj->n4."</td>";
+            }
+            echo "</tr>";
           }
-        echo "</ul>";
+          echo "</tbody>";
+          echo "</table>";
       }
   }
 ?>

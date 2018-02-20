@@ -22,6 +22,32 @@
                 include("../includes/menu.php");
             }
       ?>
+      <?php
+
+        include("../includes/conexion.php");
+
+        $consulta="select *
+                    from pistas;";
+
+
+        if ($result = $connection->query($consulta)) {
+
+              while ($obj=$result->fetch_object()) {
+                $img=$obj->imagen;
+                echo "<div class='card' style='width: 18rem;'>
+                      <img class='card-img-top' src='../img/$img'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>$obj->nombre</h5>
+                            <h6 class='card-subtitle mb-2 text-muted'>$obj->tipo</h6>
+                            <a href='reservas.php' class='card-link'>Reservar</a>
+                        </div>
+                      </div>";
+                }
+            }
+        $result->close();
+        unset($obj);
+        unset($connection);
+      ?>
       <hr>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

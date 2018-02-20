@@ -29,7 +29,12 @@
 
         include("../includes/conexion.php");
 
-        $consulta="select reservas.id_reserva,reservas.fecha,reservas.hora_inicio,pistas.tipo,usuarios.correo from usuarios,reservas,pistas where usuarios.id_usuario=reservas.id_usuario and reservas.id_pista=pistas.id_pista;";
+        $consulta="select r.id_reserva as n5,r.fecha,r.hora_inicio,p.tipo,u.correo,m.nombre,m.id_material as n6
+                    from usuarios u join reservas r on u.id_usuario=r.id_usuario
+                    join pistas p on r.id_pista=p.id_pista
+                    left join reserva_material on r.id_reserva=reserva_material.id_reserva
+                    left join material m on reserva_material.id_material=m.id_material
+                    order by r.fecha asc;";
 
         if ($result = $connection->query($consulta)) {
 
@@ -40,16 +45,23 @@
           echo "<th>Hora Inicio</th>";
           echo "<th>Pista</th>";
           echo "<th>Cliente</th>";
+          echo "<th>Material</th>";
           echo "</tr>";
           echo "</thead>";
           echo "<tbody>";
 
               while ($obj=$result->fetch_object()) {
+                $name=$obj->nombre;
                 echo "<tr>";
                   echo "<td>".$obj->fecha."</td>";
                   echo "<td>".$obj->hora_inicio."</td>";
                   echo "<td>".$obj->tipo."</td>";
                   echo "<td>".$obj->correo."</td>";
+                  if ($obj->nombre===NULL) {
+                    echo "<td><a href='add_mat2.php?a=".$obj->n5."'>+</a></td>";
+                  } else {
+                    echo "<td><a href='quitar_mat.php?a=".$obj->n5."&b=".$obj->n6."'>$name -</a></td>";
+                  }
                   echo "<td><a href='editar_reserva.php?i=".$obj->id_reserva."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/lapiz.png'></a></td>";
                   echo "<td><a href='borrar_reserva.php?i=".$obj->id_reserva."'><img class='img-responsive' width='25px' alt='Responsive image' src='../img/trash.jpg'></a></td>";
                 echo "</tr>";
