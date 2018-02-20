@@ -72,7 +72,7 @@
 
       include("../includes/conexion.php");
 
-      $consulta="INSERT INTO reserva_material (id_reserva,id_material) VALUES('".$_GET['a']."','".$_GET['b']."');";
+      $consulta="INSERT INTO reserva_material (id_reserva,id_material) VALUES('".$_GET['a']."','".$_POST['material']."');";
 
       if ($result = $connection->query($consulta))  {
         header('Location: gestionreservas.php');
