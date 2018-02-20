@@ -34,6 +34,7 @@
 
               while ($obj=$result->fetch_object()) {
                 $img=$obj->imagen;
+                echo "<br>";
                 echo "<div class='card' style='width: 18rem;'>
                       <img class='card-img-top' src='../img/$img'>
                         <div class='card-body'>
