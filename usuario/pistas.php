@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../estilo.css" type="text/css">
+
   </head>
   <body>
     <div class='container'>
@@ -37,7 +39,7 @@
               while ($obj=$result->fetch_object()) {
                 $img=$obj->imagen;
                 echo "<div class='card'>
-                      <img class='card-img-top' src='../img/$img'>
+                      <img class='card-img-top image' src='../img/$img'>
                         <div class='card-block'>
                         <h4 class='card-title'>$obj->nombre</h4>
                         <p class='card-text'>$obj->tipo</p>
